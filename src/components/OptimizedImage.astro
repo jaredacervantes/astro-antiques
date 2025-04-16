@@ -1,39 +1,21 @@
+---
 import { Image } from 'astro:assets';
 
 interface Props {
   src: string;
   alt: string;
-  class?: string;
-  width?: number;
-  height?: number;
   fill?: boolean;
-  priority?: boolean;
+  class?: string;
 }
 
-const { 
-  src, 
-  alt, 
-  class: className = "object-cover",
-  width,
-  height,
-  fill,
-  priority
-} = Astro.props;
+const { src, alt, fill, class: className } = Astro.props;
+---
 
-{fill ? (
-  <img
-    src={src}
-    alt={alt}
-    class={className}
-    loading={priority ? "eager" : "lazy"}
-  />
-}
-  <img
-    src={src}
-    alt={alt}
-    width={width}
-    height={height}
-    class={className}
-    loading={priority ? "eager" : "lazy"}
-  />
-)} 
+<img
+  src={src}
+  alt={alt}
+  class={className}
+  loading="lazy"
+  decoding="async"
+  {...(fill && { style: "position: absolute; height: 100%; width: 100%; inset: 0px;" })}
+/> 

@@ -3,11 +3,12 @@
   declare global {
     interface Window {
       toggleTheme: () => void;
+      getTheme: () => string;
     }
   }
 
-  // Check for saved theme preference, otherwise use system preference
-  const getInitialTheme = () => {
+  // Get the current theme
+  const getTheme = () => {
     if (typeof localStorage !== 'undefined') {
       const savedTheme = localStorage.getItem('theme');
       if (savedTheme) {
@@ -18,13 +19,19 @@
   };
 
   // Initialize theme
-  const theme = getInitialTheme();
-  document.documentElement.classList.toggle('dark', theme === 'dark');
+  const initializeTheme = () => {
+    const theme = getTheme();
+    document.documentElement.classList.toggle('dark', theme === 'dark');
+    return theme;
+  };
 
   // Listen for system theme changes
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
     if (!localStorage.getItem('theme')) {
       document.documentElement.classList.toggle('dark', e.matches);
+      window.dispatchEvent(new CustomEvent('themeChange', { 
+        detail: { theme: e.matches ? 'dark' : 'light' } 
+      }));
     }
   });
 
@@ -37,8 +44,21 @@
     localStorage.setItem('theme', newTheme);
     
     // Dispatch event for other components
-    window.dispatchEvent(new CustomEvent('themeChange', { detail: { theme: newTheme } }));
+    window.dispatchEvent(new CustomEvent('themeChange', { 
+      detail: { theme: newTheme } 
+    }));
   };
+
+  // Expose getTheme function
+  window.getTheme = getTheme;
+
+  // Initialize theme immediately
+  initializeTheme();
+
+  // Also initialize on DOMContentLoaded as a fallback
+  document.addEventListener('DOMContentLoaded', () => {
+    initializeTheme();
+  });
 </script>
 
 <slot /> 
