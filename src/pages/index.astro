@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import ImageGallery from '../components/ImageGallery.astro';
 
 // Hardcoded image URLs
 const galleryImages = [
@@ -28,7 +29,6 @@ const galleryImages = [
         alt="Abingdon Antiques and More Store Front"
         class="absolute inset-0 w-full h-full object-cover object-right"
       />
-      <div class="absolute inset-0 bg-black bg-opacity-50"></div>
     </section>
 
     {/* Social Media Section */}
@@ -108,14 +108,12 @@ const galleryImages = [
     <!-- Featured Items -->
     <section class="py-16 bg-white dark:bg-gray-900 transition-colors duration-200">
       <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-serif font-bold text-center mb-12 text-gray-900 dark:text-white">Featured Items</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {galleryImages.map((image, index) => (
-            <div class="rounded-lg overflow-hidden shadow-md">
-              <img src={image} alt={`Featured Antique ${index + 1}`} class="w-full h-64 object-cover" />
-            </div>
-          ))}
-        </div>
+        <ImageGallery 
+          images={galleryImages}
+          title="Featured Items"
+          columns={3}
+          aspectRatio="square"
+        />
       </div>
     </section>
 

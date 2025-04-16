@@ -40,11 +40,10 @@ const aspectRatioClass = {
         data-image={image}
         class={`relative ${aspectRatioClass[aspectRatio]} cursor-pointer group gallery-image`}
       >
-        <OptimizedImage
+        <img
           src={image}
           alt={`Gallery image ${index + 1}`}
-          fill
-          class="object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
+          class="w-full h-full object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
         />
         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 rounded-lg" />
       </div>
