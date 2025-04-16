@@ -1,11 +1,99 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Hardcoded image URLs
+const galleryImages = [
+  "https://xfcpn2nyfb.ufs.sh/f/LKapUqCN3UFsZkQKnRtPE1NxDIg9rh86Bi4RfTSylb3eKdGm",
+  "https://xfcpn2nyfb.ufs.sh/f/LKapUqCN3UFsy80sfRDG1JbILFWOoMAgx7P49VvUj5rZXtNe",
+  "https://xfcpn2nyfb.ufs.sh/f/LKapUqCN3UFsApRfExb1pPWKB2MoR9DLV5lmCjvsJGYxX3nw",
+  "https://xfcpn2nyfb.ufs.sh/f/LKapUqCN3UFsqeVP8aAo2pXgV7HBurPdSzmyUO5CK9f0lx1s",
+  "https://xfcpn2nyfb.ufs.sh/f/LKapUqCN3UFse4NPZbYKjfQh6uHwcvo0mnFrP8DByULaObG4",
+  "https://xfcpn2nyfb.ufs.sh/f/LKapUqCN3UFssWQENxRiwGqRQXjaOTYzH816lIkchyoC9txN",
+  "https://xfcpn2nyfb.ufs.sh/f/LKapUqCN3UFsED72c492bga4hAVdszcfGZt3vDSkFJe8rKwR",
+  "https://xfcpn2nyfb.ufs.sh/f/LKapUqCN3UFsd1SLKG2VFBmf9HhQVLJpzkqGNjtM6ZlxcgPW",
+  "https://xfcpn2nyfb.ufs.sh/f/LKapUqCN3UFs9bWwcqG8Hgw3jA5IqYdvuJ9CRS7lKfZzEa1L",
+];
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<Layout title="Abingdon Antiques - Home">
+  <Header />
+  
+  <main>
+    <!-- Hero Section -->
+    <section class="relative h-[70vh] min-h-[500px] w-full mb-16">
+      <img
+        src="https://xfcpn2nyfb.ufs.sh/f/LKapUqCN3UFsr4yxADfxyDUaIJcwEtMh2GFSkA5vgYbPZ3R0"
+        alt="Abingdon Antiques and More Store Front"
+        class="absolute inset-0 w-full h-full object-cover object-right"
+      />
+      <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+      <div class="absolute inset-0 z-20 flex items-center justify-center">
+        <div class="text-center text-white">
+          <h1 class="text-5xl font-serif font-bold mb-4">Discover Timeless Treasures</h1>
+          <p class="text-xl mb-8">Your premier source for fine antiques and collectibles in Abingdon</p>
+          <a href="/gallery" class="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-md transition-colors duration-200">
+            View Our Collection
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Items -->
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-serif font-bold text-center mb-12">Featured Items</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {galleryImages.slice(0, 3).map((image, index) => (
+            <div class="bg-gray-50 rounded-lg overflow-hidden shadow-md">
+              <img src={image} alt={`Featured Antique ${index + 1}`} class="w-full h-64 object-cover" />
+              <div class="p-6">
+                <h3 class="text-xl font-serif font-bold mb-2">Beautiful Antique Piece</h3>
+                <p class="text-gray-600 mb-4">Discover this unique piece in our collection</p>
+                <a href="/gallery" class="text-primary hover:text-primary/80">Learn More →</a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-16 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto text-center">
+          <h2 class="text-3xl font-serif font-bold mb-6">Welcome to Abingdon Antiques</h2>
+          <p class="text-gray-600 mb-8">
+            For over 25 years, we have been curating and offering the finest selection of antiques and collectibles.
+            Our expert team ensures that each piece in our collection meets our high standards for authenticity and condition.
+          </p>
+          <a href="/about" class="inline-block bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-md transition-colors duration-200">
+            Learn More About Us
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-gray-900 text-white py-12">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div>
+          <h3 class="text-xl font-serif font-bold mb-4">Abingdon Antiques</h3>
+          <p class="text-gray-400">Your premier source for fine antiques and collectibles</p>
+        </div>
+        <div>
+          <h3 class="text-xl font-serif font-bold mb-4">Contact</h3>
+          <p class="text-gray-400">123 Main Street<br />Abingdon, VA 24210<br />(276) 555-0123</p>
+        </div>
+        <div>
+          <h3 class="text-xl font-serif font-bold mb-4">Hours</h3>
+          <p class="text-gray-400">Tuesday - Saturday: 10am - 5pm<br />Sunday - Monday: Closed</p>
+        </div>
+      </div>
+      <div class="mt-8 pt-8 border-t border-gray-800 text-center text-gray-400">
+        <p>&copy; {new Date().getFullYear()} Abingdon Antiques. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</Layout> 

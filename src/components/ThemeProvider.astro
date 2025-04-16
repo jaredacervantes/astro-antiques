@@ -1,0 +1,44 @@
+<script>
+  // Declare toggleTheme on Window interface
+  declare global {
+    interface Window {
+      toggleTheme: () => void;
+    }
+  }
+
+  // Check for saved theme preference, otherwise use system preference
+  const getInitialTheme = () => {
+    if (typeof localStorage !== 'undefined') {
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme) {
+        return savedTheme;
+      }
+    }
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  };
+
+  // Initialize theme
+  const theme = getInitialTheme();
+  document.documentElement.classList.toggle('dark', theme === 'dark');
+
+  // Listen for system theme changes
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    if (!localStorage.getItem('theme')) {
+      document.documentElement.classList.toggle('dark', e.matches);
+    }
+  });
+
+  // Theme toggle function
+  window.toggleTheme = () => {
+    const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    document.documentElement.classList.toggle('dark');
+    localStorage.setItem('theme', newTheme);
+    
+    // Dispatch event for other components
+    window.dispatchEvent(new CustomEvent('themeChange', { detail: { theme: newTheme } }));
+  };
+</script>
+
+<slot /> 

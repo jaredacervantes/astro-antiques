@@ -1,0 +1,85 @@
+---
+import LogoHeader from "./LogoHeader.astro";
+import ThemeToggle from "./ThemeToggle.astro";
+
+const navItems = [
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '/about' },
+  { label: 'Gallery', href: '/gallery' },
+  { label: 'Contact', href: '/contact' },
+];
+---
+
+<header class="w-full bg-white dark:bg-gray-900 shadow-logo dark:shadow-gray-800 transition-colors duration-200">
+  {/* Theme Toggle - Fixed Position */}
+  <div class="fixed right-4 top-4 z-50">
+    <ThemeToggle client:load />
+  </div>
+
+  <div class="mx-auto max-w-6xl px-4 py-3 md:py-4">
+    {/* Logo Header */}
+    <div class="flex justify-center mb-3 md:mb-4">
+      <LogoHeader />
+    </div>
+
+    {/* Navigation */}
+    <nav class="border-t border-b border-logo-200 dark:border-gray-700 py-2 md:py-3">
+      {/* Mobile Menu Button */}
+      <div class="flex justify-center md:hidden">
+        <button 
+          id="mobile-menu-button"
+          class="text-logo-700 dark:text-gray-300 hover:text-logo-900 dark:hover:text-white focus:outline-none"
+          aria-label="Toggle menu"
+        >
+          <span class="block text-lg font-medium">Menu <span id="menu-icon">▼</span></span>
+        </button>
+      </div>
+
+      {/* Desktop Navigation */}
+      <ul class="hidden md:flex md:justify-center md:space-x-8 text-lg font-medium">
+        {navItems.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class="text-logo-600 dark:text-gray-300 hover:text-logo-800 dark:hover:text-white transition-colors"
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      {/* Mobile Navigation */}
+      <ul id="mobile-menu" class="hidden mt-4 flex flex-col items-center space-y-4 text-lg font-medium md:hidden">
+        {navItems.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class="text-logo-600 dark:text-gray-300 hover:text-logo-800 dark:hover:text-white transition-colors"
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuIcon = document.getElementById('menu-icon');
+  let isMobileMenuOpen = false;
+
+  mobileMenuButton?.addEventListener('click', () => {
+    isMobileMenuOpen = !isMobileMenuOpen;
+    if (mobileMenu) {
+      mobileMenu.classList.toggle('hidden');
+    }
+    if (menuIcon) {
+      menuIcon.textContent = isMobileMenuOpen ? '▲' : '▼';
+    }
+    mobileMenuButton.setAttribute('aria-label', isMobileMenuOpen ? 'Close menu' : 'Open menu');
+  });
+</script> 

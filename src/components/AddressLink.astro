@@ -1,0 +1,30 @@
+---
+interface Props {
+  address: string;
+  class?: string;
+}
+
+const { address, class: className = "hover:underline text-logo-700 dark:text-gray-300 hover:text-logo-800 dark:hover:text-white transition-colors" } = Astro.props;
+---
+
+<a 
+  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`}
+  class={className}
+  data-address={address}
+>
+  <slot />
+</a>
+
+<script>
+  document.querySelectorAll('a[data-address]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const address = (e.currentTarget as HTMLAnchorElement).dataset.address;
+      if (address) {
+        const encodedAddress = encodeURIComponent(address);
+        const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`;
+        window.open(mapsUrl, '_blank');
+      }
+    });
+  });
+</script> 
