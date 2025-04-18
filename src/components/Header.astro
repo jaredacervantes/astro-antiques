@@ -4,7 +4,7 @@ import ThemeToggle from "./ThemeToggle.astro";
 
 const navItems = [
   { label: 'Home', href: '/' },
-  { label: 'Store Information', href: '/hours-location' },
+  { label: 'Information', href: '/hours-location' },
 ];
 ---
 
@@ -22,33 +22,8 @@ const navItems = [
 
     {/* Navigation */}
     <nav class="border-t border-b border-logo-200 dark:border-gray-700 py-2 md:py-3">
-      {/* Mobile Menu Button */}
-      <div class="flex justify-center md:hidden">
-        <button 
-          id="mobile-menu-button"
-          class="text-logo-700 dark:text-gray-300 hover:text-logo-900 dark:hover:text-white focus:outline-none"
-          aria-label="Toggle menu"
-        >
-          <span class="block text-lg font-medium">Menu <span id="menu-icon">▼</span></span>
-        </button>
-      </div>
-
-      {/* Desktop Navigation */}
-      <ul class="hidden md:flex md:justify-center md:space-x-8 text-lg">
-        {navItems.map((item) => (
-          <li>
-            <a
-              href={item.href}
-              class="text-logo-600 dark:text-gray-300 hover:text-logo-800 dark:hover:text-white transition-colors"
-            >
-              {item.label}
-            </a>
-          </li>
-        ))}
-      </ul>
-
-      {/* Mobile Navigation */}
-      <ul id="mobile-menu" class="hidden mt-4 flex flex-col items-center space-y-4 text-lg md:hidden">
+      {/* Mobile and Desktop Navigation Combined */}
+      <ul class="flex justify-center space-x-4 md:space-x-8 text-lg">
         {navItems.map((item) => (
           <li>
             <a
