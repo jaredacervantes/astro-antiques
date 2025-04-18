@@ -4,12 +4,12 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 ---
 
-<Layout title="Hours & Location - Abingdon Antiques">
+<Layout title="Store Information - Abingdon Antiques">
   <Header />
   
   <main class="py-16 bg-white dark:bg-gray-900 transition-colors duration-200">
     <div class="container mx-auto px-4">
-      <h1 class="text-4xl font-serif font-bold text-center mb-12 text-gray-900 dark:text-white">Hours & Location</h1>
+      <h1 class="text-4xl font-serif font-bold text-center mb-12 text-gray-900 dark:text-white">Store Information</h1>
       
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
         <!-- Hours Information -->
@@ -103,6 +103,48 @@ import Footer from '../components/Footer.astro';
             ></iframe>
           </div>
         </div>
+      </div>
+      
+      <!-- FAQ Section -->
+      <div class="mt-12 max-w-6xl mx-auto">
+        <section class="bg-gray-100 dark:bg-gray-800 p-8 rounded-lg shadow-md transition-colors duration-200">
+          <h2 class="text-2xl font-serif font-bold mb-8 text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-700 pb-4">Frequently Asked Questions</h2>
+          
+          <div class="space-y-8">
+            <div class="p-4 rounded-lg bg-white dark:bg-gray-900/50">
+              <h3 class="mb-2 text-xl font-semibold text-gray-900 dark:text-white">What types of items do you sell?</h3>
+              <p class="text-gray-600 dark:text-gray-300">
+                We offer a wide variety of antiques and collectibles, including furniture, jewelry, glassware, 
+                pottery, and more. Our inventory is constantly changing as we receive new items.
+              </p>
+            </div>
+            
+            <div class="p-4 rounded-lg bg-white dark:bg-gray-900/50">
+              <h3 class="mb-2 text-xl font-semibold text-gray-900 dark:text-white">Do you buy antiques?</h3>
+              <p class="text-gray-600 dark:text-gray-300">
+                We may be interested in purchasing quality antiques and collectibles that fit our inventory. 
+                Please contact us to discuss what you have available.
+              </p>
+            </div>
+            
+            <div class="p-4 rounded-lg bg-white dark:bg-gray-900/50">
+              <h3 class="mb-2 text-xl font-semibold text-gray-900 dark:text-white">Do you offer appraisals?</h3>
+              <p class="text-gray-600 dark:text-gray-300">
+                Yes, we offer professional appraisals on select items. Our experienced vendors can provide 
+                detailed assessments of antiques and collectibles in their areas of expertise. Please contact 
+                us directly to discuss your specific items and arrange an appointment.
+              </p>
+            </div>
+            
+            <div class="p-4 rounded-lg bg-white dark:bg-gray-900/50">
+              <h3 class="mb-2 text-xl font-semibold text-gray-900 dark:text-white">How can I become a vendor?</h3>
+              <p class="text-gray-600 dark:text-gray-300">
+                We welcome new vendors who specialize in quality antiques and collectibles. Please contact us directly 
+                to discuss available spaces and requirements.
+              </p>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   </main>
