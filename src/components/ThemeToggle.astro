@@ -66,4 +66,9 @@
   if (document.readyState === 'complete' || document.readyState === 'interactive') {
     initializeIcons();
   }
+
+  // Initialize after view transitions
+  document.addEventListener('astro:page-load', () => {
+    initializeIcons();
+  });
 </script> 
