@@ -59,6 +59,16 @@
   document.addEventListener('DOMContentLoaded', () => {
     initializeTheme();
   });
+
+  // Initialize after view transitions
+  document.addEventListener('astro:page-load', () => {
+    initializeTheme();
+  });
+
+  // Initialize theme before view transition
+  document.addEventListener('astro:before-preparation', () => {
+    initializeTheme();
+  });
 </script>
 
 <slot /> 
