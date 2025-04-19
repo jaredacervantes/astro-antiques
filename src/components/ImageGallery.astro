@@ -1,5 +1,5 @@
 ---
-import OptimizedImage from './OptimizedImage.astro';
+import { Image } from 'astro:assets';
 
 interface Props {
   images: string[];
@@ -27,6 +27,11 @@ const aspectRatioClass = {
   'video': 'aspect-video',
   'auto': 'aspect-auto'
 };
+
+// Function to check if a URL is external
+const isExternalUrl = (url: string) => {
+  return url.startsWith('http://') || url.startsWith('https://');
+};
 ---
 
 <section class="py-8">
@@ -40,11 +45,25 @@ const aspectRatioClass = {
         data-image={image}
         class={`relative ${aspectRatioClass[aspectRatio]} cursor-pointer group gallery-image`}
       >
-        <img
-          src={image}
-          alt={`Gallery image ${index + 1}`}
-          class="w-full h-full object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
-        />
+        {isExternalUrl(image) ? (
+          <img
+            src={image}
+            alt={`Gallery image ${index + 1}`}
+            class="w-full h-full object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
+            loading="lazy"
+            decoding="async"
+          />
+        ) : (
+          <Image
+            src={image}
+            alt={`Gallery image ${index + 1}`}
+            width={800}
+            height={800}
+            class="w-full h-full object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
+            loading="lazy"
+            decoding="async"
+          />
+        )}
         <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 rounded-lg" />
       </div>
     ))}

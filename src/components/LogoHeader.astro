@@ -4,13 +4,14 @@ import { Image } from 'astro:assets';
 
 <a href="/" class="block w-[180px] md:w-[240px] cursor-pointer">
   <div class="bg-white dark:bg-gray-900 rounded-lg shadow-logo dark:shadow-gray-800 border border-logo-100 dark:border-gray-700 transition-colors duration-200">
-    <img
-      src="https://xfcpn2nyfb.ufs.sh/f/LKapUqCN3UFssgg9HORiwGqRQXjaOTYzH816lIkchyoC9txN"
+    <Image
+      src="/images/logo.jpg"
       alt="Abingdon Antiques and More"
       width={240}
       height={70}
       class="w-full h-auto object-contain"
-      onerror="this.parentElement.style.display='none'; this.parentElement.nextElementSibling.style.display='flex';"
+      loading="eager"
+      decoding="async"
     />
   </div>
   <div class="hidden items-center justify-center rounded border-2 border-dashed border-logo-300 dark:border-gray-600 bg-white dark:bg-gray-900 p-3 text-center transition-colors duration-200">

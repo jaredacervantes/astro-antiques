@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import ImageGallery from '../components/ImageGallery.astro';
+import { Image } from 'astro:assets';
 
 // Hardcoded image URLs
 const galleryImages = [
@@ -27,10 +28,15 @@ const galleryImages = [
       <div class="container mx-auto px-4">
         <div class="max-w-6xl mx-auto">
           <div class="relative h-[80vh] min-h-[600px] w-full rounded-lg overflow-hidden shadow-lg">
-            <img
-              src="https://xfcpn2nyfb.ufs.sh/f/LKapUqCN3UFsr4yxADfxyDUaIJcwEtMh2GFSkA5vgYbPZ3R0"
+            <Image
+              src="/images/hero.jpg"
               alt="Abingdon Antiques and More Store Front"
+              width={1920}
+              height={1080}
               class="absolute inset-0 w-full h-full object-cover md:object-center object-[75%_center]"
+              loading="eager"
+              decoding="async"
+              quality={90}
             />
           </div>
         </div>
@@ -109,6 +115,8 @@ const galleryImages = [
                   class="rounded object-cover w-full h-auto"
                   width={500}
                   height={300}
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>
