@@ -7,4 +7,8 @@ import mdx from '@astrojs/mdx';
 export default defineConfig({
   integrations: [tailwind(), mdx()],
   site: 'https://astro-antiques.vercel.app',
+  output: 'static',
+  build: {
+    format: 'directory'
+  }
 });

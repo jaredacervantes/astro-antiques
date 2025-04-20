@@ -19,18 +19,16 @@ COPY . .
 RUN pnpm build
 
 # Production stage
-FROM node:20-alpine AS runner
-
-WORKDIR /app
-
-# Install serve package globally
-RUN npm install -g serve
+FROM nginx:alpine
 
 # Copy built application from builder stage
-COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+# Copy nginx configuration
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Expose the port the app runs on
 EXPOSE 4321
 
-# Start the application using serve
-CMD ["serve", "-s", "dist", "-l", "4321"] 
+# Start nginx
+CMD ["nginx", "-g", "daemon off;"] 
