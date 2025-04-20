@@ -1,5 +1,5 @@
 # Build stage
-FROM node:20-alpine AS builder
+FROM node:20-alpine
 
 # Install pnpm
 RUN corepack enable && corepack prepare pnpm@10.7.1 --activate
@@ -18,17 +18,8 @@ COPY . .
 # Build the site
 RUN pnpm build
 
-# Production stage
-FROM nginx:alpine
+# Expose the preview port
+EXPOSE 4321
 
-# Copy the built files from builder stage to nginx
-COPY --from=builder /app/dist /usr/share/nginx/html
-
-# Copy nginx configuration if you have custom config
-# COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-# Expose port 80
-EXPOSE 80
-
-# Start nginx
-CMD ["nginx", "-g", "daemon off;"] 
+# Start the preview server
+CMD ["pnpm", "preview", "--host"] 
