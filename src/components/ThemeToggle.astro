@@ -68,7 +68,11 @@
   }
 
   // Initialize after view transitions
-  document.addEventListener('astro:page-load', () => {
-    initializeIcons();
-  });
+  document.addEventListener('astro:page-load', initializeIcons);
+  
+  // Initialize before view transitions
+  document.addEventListener('astro:before-preparation', initializeIcons);
+  
+  // Initialize after view transition preparation
+  document.addEventListener('astro:after-preparation', initializeIcons);
 </script> 
