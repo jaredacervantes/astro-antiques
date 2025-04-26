@@ -69,26 +69,18 @@ const isExternalUrl = (url: string) => {
     ))}
   </div>
 
-  {/* Lightbox */}
+  {/* Simple Lightbox */}
   <div
     id="lightbox"
-    class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 hidden"
+    class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 hidden overflow-auto cursor-pointer"
   >
-    <div class="relative max-w-4xl w-full">
-      <button
-        id="close-lightbox"
-        class="absolute -top-12 right-0 text-white hover:text-gray-300"
-      >
-        Close
-      </button>
-      <div class="relative aspect-square">
-        <img
-          id="lightbox-image"
-          src=""
-          alt="Selected item"
-          class="w-full h-full object-contain"
-        />
-      </div>
+    <div class="relative w-full h-full flex items-center justify-center">
+      <img
+        id="lightbox-image"
+        src=""
+        alt="Selected item"
+        class="max-w-full max-h-[90vh] object-contain"
+      />
     </div>
   </div>
 </section>
@@ -96,7 +88,6 @@ const isExternalUrl = (url: string) => {
 <script>
   const lightbox = document.getElementById('lightbox');
   const lightboxImage = document.getElementById('lightbox-image') as HTMLImageElement;
-  const closeButton = document.getElementById('close-lightbox');
   const galleryImages = document.querySelectorAll('.gallery-image');
 
   galleryImages.forEach(image => {
@@ -109,16 +100,16 @@ const isExternalUrl = (url: string) => {
     });
   });
 
-  const closeLightbox = () => {
+  // Close lightbox when clicking anywhere
+  lightbox?.addEventListener('click', () => {
     if (lightbox) {
       lightbox.classList.add('hidden');
     }
-  };
-
-  closeButton?.addEventListener('click', closeLightbox);
-  lightbox?.addEventListener('click', (e) => {
-    if (e.target === lightbox) {
-      closeLightbox();
-    }
   });
-</script> 
+</script>
+
+<style>
+  #lightbox-image {
+    transition: transform 0.3s ease-in-out;
+  }
+</style> 
