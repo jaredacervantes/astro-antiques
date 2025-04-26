@@ -1,4 +1,4 @@
-# Astro Antiques
+# Abingdon Antiques
 
 A simple website for an antique shop built with Astro and Tailwind CSS.
 
