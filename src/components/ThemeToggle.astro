@@ -75,4 +75,7 @@
   
   // Initialize after view transition preparation
   document.addEventListener('astro:after-preparation', initializeIcons);
+
+  // Initialize on every navigation
+  document.addEventListener('astro:after-swap', initializeIcons);
 </script> 
