@@ -1,15 +1,19 @@
 ---
 import { Image } from 'astro:assets';
+
+// Get the current path to determine if we're on the home page
+const currentPath = Astro.url.pathname;
+const isHomePage = currentPath === '/';
 ---
 
-<a href="/" class="block w-[180px] md:w-[240px] cursor-pointer">
-  <div class="bg-white dark:bg-gray-900 rounded-lg shadow-logo dark:shadow-gray-800 border border-logo-100 dark:border-gray-700 transition-colors duration-200">
+<a href="/" class={`block cursor-pointer logo-container ${isHomePage ? 'w-[180px] md:w-[240px]' : 'w-[120px] md:w-[160px]'}`} style="view-transition-name: logo">
+  <div class="bg-white dark:bg-gray-900 rounded-lg shadow-logo dark:shadow-gray-800 border border-logo-100 dark:border-gray-700 transition-all duration-500">
     <Image
       src="/images/logo.jpg"
       alt="Abingdon Antiques and More"
       width={240}
       height={70}
-      class="w-full h-auto object-contain"
+      class="w-full h-auto object-contain transition-all duration-500"
       loading="eager"
       decoding="async"
     />
@@ -20,4 +24,36 @@ import { Image } from 'astro:assets';
       <p class="text-sm text-logo-600 dark:text-gray-300">and More Vendor Mall</p>
     </div>
   </div>
-</a> 
+</a>
+
+<style>
+  .logo-container {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  @keyframes logo-scale {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(0.6);
+    }
+  }
+  
+  @keyframes logo-scale-reverse {
+    from {
+      transform: scale(0.6);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+  
+  ::view-transition-old(logo) {
+    animation: logo-scale 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  ::view-transition-new(logo) {
+    animation: logo-scale-reverse 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+</style> 
