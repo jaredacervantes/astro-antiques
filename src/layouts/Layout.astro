@@ -61,6 +61,16 @@ const { title, description = "Abingdon Antiques - Your Premier Source for Fine A
 			monospace;
 	}
 
+	/* Global link styles for unclassed links */
+	a:not([class]) {
+		color: #8B4513;
+		text-decoration: underline;
+		text-underline-offset: 4px;
+	}
+	.dark a:not([class]) {
+		color: #D1D5DB;
+	}
+
 	/* View Transitions */
 	::view-transition-old(root),
 	::view-transition-new(root) {
