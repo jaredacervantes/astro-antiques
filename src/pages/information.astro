@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import AddressLink from '../components/AddressLink.astro';
 ---
 
 <Layout title="Information - Abingdon Antiques">
@@ -48,15 +49,10 @@ import Footer from '../components/Footer.astro';
           <div class="space-y-4">
             <div>
               <h3 class="font-medium text-gray-900 dark:text-white">Address:</h3>
-              <a 
-                href="https://maps.google.com/?q=227+West+Main+Street+Abingdon+VA+24210" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors"
-              >
+              <AddressLink address="227 West Main Street, Abingdon, VA 24210">
                 <p>227 West Main Street</p>
                 <p>Abingdon, VA 24210</p>
-              </a>
+              </AddressLink>
             </div>
             <div>
               <h3 class="font-medium text-gray-900 dark:text-white">Phone:</h3>

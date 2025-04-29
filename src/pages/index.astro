@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import ImageGallery from '../components/ImageGallery.astro';
+import AddressLink from '../components/AddressLink.astro';
 import { Image } from 'astro:assets';
 
 // Hardcoded image URLs
@@ -95,14 +96,9 @@ const galleryImages = [
                 </h2>
                 <p class="mb-6 text-lg text-gray-600 dark:text-gray-300">
                   <span class="font-semibold">We are now exclusively located at:</span><br />
-                  <a 
-                    href="https://maps.google.com/?q=227+W+Main+St+Abingdon+VA+24210" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary transition-colors"
-                  >
+                  <AddressLink address="227 W Main St, Abingdon, VA 24210">
                     227 W Main St, Abingdon, VA 24210
-                  </a>
+                  </AddressLink>
                 </p>
                 <p class="text-gray-600 dark:text-gray-300">
                   We have successfully completed our move to our new location! Come visit us at our beautiful new space in the heart of downtown Abingdon.
