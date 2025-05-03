@@ -6,6 +6,9 @@ const navItems = [
   { label: 'Home', href: '/' },
   { label: 'Information', href: '/information' },
 ];
+
+// Get the current pathname
+const currentPath = Astro.url.pathname;
 ---
 
 <header class="w-full bg-white dark:bg-gray-900 shadow-logo dark:shadow-gray-800 transition-colors duration-200">
@@ -28,7 +31,7 @@ const navItems = [
           <li>
             <a
               href={item.href}
-              class="text-logo-600 dark:text-gray-300 hover:text-logo-800 dark:hover:text-white transition-colors"
+              class="text-blue-600 dark:text-blue-400 hover:underline transition-colors"
             >
               {item.label}
             </a>
