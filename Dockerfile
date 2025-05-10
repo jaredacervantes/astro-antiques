@@ -20,19 +20,13 @@ COPY . .
 RUN pnpm build
 
 # Production stage
-FROM node:20-slim
+FROM nginx:alpine
 
-# Install http-server globally
-RUN npm install -g http-server
+# Copy the built files from builder stage to nginx
+COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Set working directory
-WORKDIR /app
+# Expose port 80
+EXPOSE 80
 
-# Copy the built files from builder stage
-COPY --from=builder /app/dist .
-
-# Expose port 8080
-EXPOSE 8080
-
-# Start http-server
-CMD ["http-server", ".", "-p", "8080", "--cors", "-c-1"] 
+# Start nginx
+CMD ["nginx", "-g", "daemon off;"]
