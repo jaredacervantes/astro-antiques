@@ -31,7 +31,11 @@ const currentPath = Astro.url.pathname;
           <li>
             <a
               href={item.href}
-              class="text-blue-600 dark:text-blue-400 hover:underline transition-colors"
+              class={`transition-colors ${
+                currentPath === item.href
+                  ? 'text-white font-bold'
+                  : 'text-blue-600 dark:text-blue-400 hover:underline'
+              }`}
             >
               {item.label}
             </a>
