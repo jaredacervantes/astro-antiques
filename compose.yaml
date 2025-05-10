@@ -3,5 +3,5 @@ services:
     container_name: astro-antiques
     image: ghcr.io/jaredy899/astro-antiques:latest
     ports:
-      - "4000:8080" 
+      - "80:80" 
     restart: unless-stopped
