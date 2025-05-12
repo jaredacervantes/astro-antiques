@@ -7,8 +7,14 @@ const navItems = [
   { label: 'Information', href: '/information' },
 ];
 
-// Get the current pathname
+// Get the current pathname and normalize it
 const currentPath = Astro.url.pathname;
+const isActive = (href: string) => {
+  if (href === '/') {
+    return currentPath === '/';
+  }
+  return currentPath.startsWith(href);
+};
 ---
 
 <header class="w-full bg-white dark:bg-gray-900 shadow-logo dark:shadow-gray-800 transition-colors duration-200">
@@ -32,7 +38,7 @@ const currentPath = Astro.url.pathname;
             <a
               href={item.href}
               class={`transition-colors ${
-                currentPath === item.href
+                isActive(item.href)
                   ? 'text-blue-600 dark:text-blue-400 font-bold'
                   : 'text-blue-600 dark:text-blue-400 hover:underline'
               }`}
