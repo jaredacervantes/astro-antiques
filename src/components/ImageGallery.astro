@@ -8,9 +8,9 @@ interface Props {
   aspectRatio?: 'square' | 'video' | 'auto';
 }
 
-const { 
-  images, 
-  title, 
+const {
+  images,
+  title,
   columns = 3,
   aspectRatio = 'square'
 } = Astro.props;
@@ -38,11 +38,12 @@ const isExternalUrl = (url: string) => {
   {title && (
     <h2 class="text-3xl font-serif font-bold text-center mb-8 text-gray-900 dark:text-white">{title}</h2>
   )}
-  
+
   <div class={`grid ${gridCols[columns]} gap-6`}>
     {images.map((image, index) => (
       <div
         data-image={image}
+        data-index={index}
         class={`relative ${aspectRatioClass[aspectRatio]} cursor-pointer group gallery-image`}
       >
         {isExternalUrl(image) ? (
@@ -72,7 +73,7 @@ const isExternalUrl = (url: string) => {
   {/* Simple Lightbox */}
   <div
     id="lightbox"
-    class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 hidden overflow-auto cursor-pointer"
+    class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4 hidden overflow-auto cursor-pointer opacity-0 transition-opacity duration-300"
   >
     <div class="relative w-full h-full flex items-center justify-center">
       <img
@@ -81,6 +82,21 @@ const isExternalUrl = (url: string) => {
         alt="Selected item"
         class="max-w-full max-h-[90vh] object-contain"
       />
+      <!-- Navigation Buttons -->
+      <button
+        id="lightbox-prev"
+        class="absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-4xl p-2 z-10"
+        aria-label="Previous image"
+      >
+        &lsaquo;
+      </button>
+      <button
+        id="lightbox-next"
+        class="absolute right-4 top-1/2 transform -translate-y-1/2 text-white text-4xl p-2 z-10"
+        aria-label="Next image"
+      >
+        &rsaquo;
+      </button>
     </div>
   </div>
 </section>
@@ -88,28 +104,78 @@ const isExternalUrl = (url: string) => {
 <script>
   const lightbox = document.getElementById('lightbox');
   const lightboxImage = document.getElementById('lightbox-image') as HTMLImageElement;
+  const prevButton = document.getElementById('lightbox-prev');
+  const nextButton = document.getElementById('lightbox-next');
   const galleryImages = document.querySelectorAll('.gallery-image');
+  const imageUrls = Array.from(galleryImages).map(img => img.getAttribute('data-image') || '');
+  let currentIndex = 0;
 
-  galleryImages.forEach(image => {
+  const showImage = (index: number) => {
+    if (lightboxImage && imageUrls[index]) {
+      lightboxImage.src = imageUrls[index];
+      currentIndex = index;
+    }
+  };
+
+  galleryImages.forEach((image, index) => {
     image.addEventListener('click', () => {
-      const imageUrl = image.getAttribute('data-image');
-      if (imageUrl && lightbox && lightboxImage) {
-        lightboxImage.src = imageUrl;
+      if (lightbox) {
+        showImage(index);
         lightbox.classList.remove('hidden');
+        // Trigger the opacity transition after a short delay
+        setTimeout(() => {
+          lightbox.classList.add('opacity-100');
+        }, 10);
       }
     });
   });
 
-  // Close lightbox when clicking anywhere
-  lightbox?.addEventListener('click', () => {
+  // Close lightbox function
+  const closeLightbox = () => {
     if (lightbox) {
-      lightbox.classList.add('hidden');
+      lightbox.classList.remove('opacity-100');
+      // Hide the lightbox after the transition
+      lightbox.addEventListener('transitionend', function handler() {
+        if (lightbox.classList.contains('opacity-0')) {
+           lightbox.classList.add('hidden');
+           lightbox.removeEventListener('transitionend', handler);
+        }
+      });
+    }
+  };
+
+  // Close lightbox when clicking the background
+  lightbox?.addEventListener('click', (event) => {
+    // Check if the click was directly on the lightbox background, not the image or buttons
+    if (event.target === lightbox) {
+      closeLightbox();
     }
   });
+
+  // Close lightbox with Escape key
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && !lightbox?.classList.contains('hidden')) {
+      closeLightbox();
+    }
+  });
+
+  // Navigation
+  prevButton?.addEventListener('click', (event) => {
+      event.stopPropagation(); // Prevent closing the lightbox
+      const prevIndex = (currentIndex - 1 + imageUrls.length) % imageUrls.length;
+      showImage(prevIndex);
+  });
+
+  nextButton?.addEventListener('click', (event) => {
+      event.stopPropagation(); // Prevent closing the lightbox
+      const nextIndex = (currentIndex + 1) % imageUrls.length;
+      showImage(nextIndex);
+  });
+
 </script>
 
 <style>
   #lightbox-image {
     transition: transform 0.3s ease-in-out;
   }
-</style> 
+</style>
