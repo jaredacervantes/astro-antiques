@@ -144,12 +144,13 @@ const isExternalUrl = (url: string) => {
     }
   };
 
-  // Close lightbox when clicking the background
+  // Close lightbox when clicking anywhere except navigation buttons
   lightbox?.addEventListener('click', (event) => {
-    // Check if the click was directly on the lightbox background, not the image or buttons
-    if (event.target === lightbox) {
-      closeLightbox();
+    // Only prevent closing if clicking the navigation buttons
+    if (event.target === prevButton || event.target === nextButton) {
+      return;
     }
+    closeLightbox();
   });
 
   // Close lightbox with Escape key
