@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import ImageGallery from '../components/ImageGallery.astro';
+import AddressLink from '../components/AddressLink.astro';
 import { Image } from 'astro:assets';
 
 // Hardcoded image URLs
@@ -38,6 +39,43 @@ const galleryImages = [
               decoding="async"
               quality={90}
             />
+          </div>
+        </div>
+      </div>
+    </section>
+
+     {/* New Location Announcement */}
+     <section class="py-16 bg-white dark:bg-gray-900 transition-colors duration-200">
+      <div class="container mx-auto px-4">
+        <div class="max-w-6xl mx-auto">
+          <div class="border-2 border-gray-200 dark:border-gray-700 rounded-lg p-8 shadow-lg bg-white dark:bg-gray-800">
+            <div class="grid items-center gap-8 md:grid-cols-2">
+              <div>
+                <h2 class="text-3xl font-serif font-bold mb-6 text-gray-900 dark:text-white">
+                  Our New Home!
+                </h2>
+                <p class="mb-6 text-lg text-gray-600 dark:text-gray-300">
+                  <span class="font-semibold">We are now exclusively located at:</span><br />
+                  <AddressLink address="227 W Main St, Abingdon, VA 24210" class="text-blue-600 dark:text-blue-400 hover:underline">
+                    227 W Main St, Abingdon, VA 24210
+                  </AddressLink>
+                </p>
+                <p class="text-gray-600 dark:text-gray-300">
+                  We have successfully completed our move to our new location! Come visit us at our beautiful new space in the heart of downtown Abingdon.
+                </p>
+              </div>
+              <div class="rounded-lg overflow-hidden">
+                <img 
+                  src="https://xfcpn2nyfb.ufs.sh/f/LKapUqCN3UFsWShw4AnAoZYFIrpQJyB8wcDh0eKmCV6iTnMg" 
+                  alt="Our new location at 227 W Main St" 
+                  class="rounded object-cover w-full h-auto"
+                  width={500}
+                  height={300}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>
