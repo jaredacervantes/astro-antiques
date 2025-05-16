@@ -1,6 +1,6 @@
 ---
 import ThemeProvider from '../components/ThemeProvider.astro';
-import { ViewTransitions } from 'astro:transitions';
+import { ClientRouter } from 'astro:transitions';
 
 interface Props {
 	title: string;
@@ -21,9 +21,9 @@ const { title, description = "Abingdon Antiques - Your Premier Source for Fine A
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
-		<ViewTransitions />
+		<ClientRouter />
 	</head>
-	<body class="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200">
+	<body class="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200" transition:animate="fade">
 		<ThemeProvider>
 			<slot />
 		</ThemeProvider>
